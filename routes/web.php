@@ -20,4 +20,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/admin/dashboard',[\App\Http\Controllers\AdminController::class, 'dashboard']);
 Route::get('/test', [\App\Http\Controllers\BannerController::class, 'test']);
-Route::resource('products', \App\Http\Controllers\ProductController::class);
+Route::resource('product', \App\Http\Controllers\ProductController::class);
+Route::resource('banner', \App\Http\Controllers\BannerController::class);
