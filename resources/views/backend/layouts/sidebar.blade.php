@@ -53,7 +53,7 @@
                 </ul>
             </li>
             <li>
-                <a href="{{ route('banner.create') }}">
+                <a href="{{ route('admin.banner.index') }}">
                     <i class="fa fa-picture-o" aria-hidden="true"></i> <span>Banner</span>
                 </a>
             </li>

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AdminLTE 2 | Dashboard</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -37,6 +38,10 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <script>
+        var _token = '{{ csrf_token() }}';
+    </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -91,6 +96,8 @@
 
 <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
 
+<script src="{{ asset('backend/js/notify.min.js') }}"></script>
+
 <!-- AdminLTE App -->
 <script src="{{ asset('backend') }}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -100,7 +107,15 @@
 
 <script type="text/javascript">
     CKEDITOR.replace( 'description' );
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+        }
+    })
 </script>
+
+@yield('js')
 
 </body>
 </html>
