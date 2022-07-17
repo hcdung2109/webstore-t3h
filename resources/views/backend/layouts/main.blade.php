@@ -98,6 +98,8 @@
 
 <script src="{{ asset('backend/js/notify.min.js') }}"></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <!-- AdminLTE App -->
 <script src="{{ asset('backend') }}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -106,7 +108,6 @@
 <script src="{{ asset('backend') }}/dist/js/demo.js"></script>
 
 <script type="text/javascript">
-    CKEDITOR.replace( 'description' );
 
     $.ajaxSetup({
         headers: {

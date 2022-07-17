@@ -53,6 +53,16 @@
                 </ul>
             </li>
             <li>
+                <a href="{{ route('admin.category.index') }}">
+                    <i class="fa fa-picture-o" aria-hidden="true"></i> <span>QL Danh Mục</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.article.index') }}">
+                    <i class="fa fa-picture-o" aria-hidden="true"></i> <span>QL Bài viết</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.banner.index') }}">
                     <i class="fa fa-picture-o" aria-hidden="true"></i> <span>Banner</span>
                 </a>
