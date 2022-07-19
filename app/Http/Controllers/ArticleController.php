@@ -20,7 +20,7 @@ class ArticleController extends Controller
         //$data = Article::all(); // SELECT * FROM Articles
 
         //Cách 2: Lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-        $data = Article::latest()->paginate(3);
+        $data = Article::latest()->paginate(10);
 
 
         return view('backend.article.index', ['data' => $data]);
@@ -62,6 +62,8 @@ class ArticleController extends Controller
             'category_id.required' => 'Bạn cần phải chọn danh mục',
             'summary.required' => 'Bạn cần phải nhập vào tóm tắt',
             'description.required' => 'Bạn cần phải nhập vào mô tả',
+            'meta_title.required' => 'Bạn cần phải nhập vào meta title',
+            'meta_description.required' => 'Bạn cần phải nhập vào meta description',
         ]);
 
         $Article = new Article();
@@ -132,8 +134,9 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $model = Article::findOrFail($id);
+        $categories = Category::all(); // select * from categories
 
-        return view('backend.article.edit', ['model' => $model]);
+        return view('backend.article.edit', ['model' => $model, 'categories' => $categories]);
     }
 
     /**
@@ -148,15 +151,21 @@ class ArticleController extends Controller
         // xác thực dữ liệu - validate
         $request->validate([
             'title' => 'required|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
-            'target' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            'category_id' => 'required',
+            'summary' => 'required',
             'description' => 'required',
+            'meta_title' => 'required',
+            'meta_description' => 'required',
         ],[
             'title.required' => 'Bạn cần phải nhập vào tiêu đề',
             'image.required' => 'Bạn chưa chọn file ảnh',
             'image.image' => 'File ảnh phải có dạng jpeg,png,jpg,gif,svg',
-            'target.required' => 'Bạn cần phải target',
+            'category_id.required' => 'Bạn cần phải chọn danh mục',
+            'summary.required' => 'Bạn cần phải nhập vào tóm tắt',
             'description.required' => 'Bạn cần phải nhập vào mô tả',
+            'meta_title.required' => 'Bạn cần phải nhập vào meta title',
+            'meta_description.required' => 'Bạn cần phải nhập vào meta description',
         ]);
 
         $Article = Article::findOrFail($id);
@@ -164,7 +173,6 @@ class ArticleController extends Controller
         $Article->slug = Str::slug($request->input('title')); //slug
 
         if($request->hasFile('image')) { // Kiem tra xem co image duoc chon khong
-            @unlink(public_path($Article->image));
             //get File
             $file = $request->file('image');
             // Dat ten cho file image
@@ -178,10 +186,10 @@ class ArticleController extends Controller
         }
 
         $Article->url = $request->input('url');
-        $Article->target = $request->input('target');
+        $Article->category_id = $request->input('category_id');
 
         // Loai
-        $Article->type = $request->input('type');
+        //$Article->type = $request->input('type') ?? 0;
         //Trang thai
         $is_active = 0;
         if($request->has('is_active')) { //Kiem tra xem is_active co ton tai khong
@@ -197,7 +205,10 @@ class ArticleController extends Controller
         $Article->position = $position;
         //Mo ta
 
+        $Article->summary = $request->input('summary');
         $Article->description = $request->input('description');
+        $Article->meta_title = $request->input('meta_title');
+        $Article->meta_description = $request->input('meta_description');
         //Luu
         $Article->save();
 
@@ -217,7 +228,7 @@ class ArticleController extends Controller
         // xóa ảnh cũ
         @unlink(public_path($Article->image));
 
-        Article::destroy($id);
+        Article::destroy($id); // DELETE FROM articles WHERE id = ?
 
         return response()->json([
             'status' => true,

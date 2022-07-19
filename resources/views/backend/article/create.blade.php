@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label id="label-description">Tóm tắt</label>
+                                <label id="label-summary">Tóm tắt</label>
                                 <textarea id="summary" name="summary" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                             </div>
 
@@ -127,9 +127,37 @@
                     return false;
                 }
 
-                if ($('#description').val() === '') {
+                if ($('#category_id').val() === 0 || $('#category_id').val() === '') {
+                    $('#category_id').notify('Bạn chưa chọn danh mục','error');
+                    document.getElementById('category_id').scrollIntoView();
+                    return false;
+                }
+
+                var summary = CKEDITOR.instances["summary"].getData();
+
+                if (summary === '') {
+                    $('#label-summary').notify('Bạn nhập chưa nhập tóm tắt','error');
+                    document.getElementById('label-summary').scrollIntoView();
+                    return false;
+                }
+
+                var description = CKEDITOR.instances["description"].getData();
+
+                if (description === '') {
                     $('#label-description').notify('Bạn nhập chưa nhập mô tả','error');
                     document.getElementById('label-description').scrollIntoView();
+                    return false;
+                }
+
+                if ($('#meta_title').val() === '') {
+                    $('#meta_title').notify('Bạn chưa chọn danh mục','error');
+                    document.getElementById('meta_title').scrollIntoView();
+                    return false;
+                }
+
+                if ($('#meta_description').val() === '') {
+                    $('#meta_description').notify('Bạn chưa chọn danh mục','error');
+                    document.getElementById('meta_description').scrollIntoView();
                     return false;
                 }
             });
