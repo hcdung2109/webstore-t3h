@@ -3,11 +3,11 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Danh Sách Danh Mục
+            Danh Sách Liên Hệ
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-            <li class="active">Danh mục</li>
+            <li class="active">Danh Sách Liên Hệ</li>
         </ol>
     </section>
 
@@ -16,46 +16,26 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
-                    <div class="box-header with-border">
-                        <a href="{{ route('admin.category.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                    </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table class="table table-bordered">
                             <tr>
                                 <th style="width: 10px">TT</th>
-                                <th>Hình ảnh</th>
-                                <th>Tên</th>
-                                <th>Danh mục cha</th>
-                                <th>Trạng thái</th>
-                                <th>Sắp sếp</th>
+                                <th>Tên Khách Hàng</th>
+                                <th>SĐT</th>
+                                <th>Email</th>
+                                <th>Nội dung</th>
                                 <th>Hành động</th>
                             </tr>
                             @foreach($data as $key => $item)
-                                @php
-
-                                @endphp
                             <tr class="item-{{ $item->id }}">
                                 <td>{{ $key + 1 }}</td>
-                                <td>
-                                    @if($item->image && file_exists(public_path($item->image)))
-                                        <img src="{{ asset($item->image) }}" width="100" height="75" alt="">
-                                    @else
-                                        <img src="{{ asset('upload/404.png') }}" width="100" height="75" alt="">
-                                    @endif
-                                </td>
                                 <td>{{ $item->name }}</td>
+                                <td>{{ $item->phone }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->content }}</td>
                                 <td>
-                                    {{ !empty($item->parent->name) ? $item->parent->name : '' }}
-                                </td>
-                                <td>
-                                    {!! $item->is_active == 1 ? '<span class="badge bg-green">ON</span>' : '<span class="badge bg-danger">OFF</span>' !!}
-                                </td>
-                                <td>
-                                    {{ $item->position }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.category.edit', ['category' => $item->id]) }}"><span title="Chỉnh sửa" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>
+                                    <a href="{{ route('admin.contact.edit', ['contact' => $item->id]) }}"><span title="Chỉnh sửa" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>
                                     <span data-id="{{ $item->id }}" title="Xóa" class="btn btn-flat btn-danger deleteItem"><i class="fa fa-trash"></i></span>
                                 </td>
                             </tr>
@@ -93,7 +73,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url : '/admin/category/'+id,
+                            url : '/admin/contact/'+id,
                             type: 'DELETE',
                             data: {},
                             success: function (res) {

@@ -85,6 +85,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="exampleInputPassword1">Thời gian mở cửa</label>
+                                <input value="{{ $model->open_time }}" type="text" class="form-control" id="open_time" name="open_time" placeholder="">
+                            </div>
+
+                            <div class="form-group">
                                 <label id="label-description">Giới thiệu</label>
                                 <textarea id="content" name="content" class="form-control" rows="3" placeholder="Enter ...">{{ $model->content }}</textarea>
                             </div>

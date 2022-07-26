@@ -6,9 +6,8 @@
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Chỉnh sửa
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Forms</a></li>
-            <li class="active">General Elements</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+            <li class="active">Chỉnh sửa</li>
         </ol>
     </section>
 

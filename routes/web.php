@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/lien-he', [\App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+Route::post('/lien-he', [\App\Http\Controllers\HomeController::class, 'contactPost'])->name('contactPost');
+
+Route::get('/admin/login', [\App\Http\Controllers\AdminController::class, 'login']);
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard',[\App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
@@ -27,4 +31,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('category', \App\Http\Controllers\CategoryController::class);
     Route::resource('article', \App\Http\Controllers\ArticleController::class);
     Route::resource('setting', \App\Http\Controllers\SettingController::class);
+    Route::resource('contact', \App\Http\Controllers\ContactController::class);
+    Route::resource('user', \App\Http\Controllers\UserController::class);
 });

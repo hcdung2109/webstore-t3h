@@ -47,6 +47,18 @@
             </li>
 
             <li>
+                <a href="{{ route('admin.contact.index') }}">
+                    <i class="fa fa-picture-o" aria-hidden="true"></i> <span>QL Liên hệ</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('admin.user.index') }}">
+                    <i class="fa fa-picture-o" aria-hidden="true"></i> <span>QL Thành viên</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="{{ route('admin.setting.index') }}">
                     <i class="fa fa-picture-o" aria-hidden="true"></i> <span>Cấu hình Website</span>
                 </a>

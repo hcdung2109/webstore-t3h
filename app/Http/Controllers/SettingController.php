@@ -61,7 +61,7 @@ class SettingController extends Controller
         $model->tax = $request->input('taxt');
         $model->content = $request->input('content');
         $model->facebook = $request->input('facebook');
-        $model->company = $request->input('company');
+        $model->open_time = $request->input('open_time');
         $model->save();
 
         //Chuyen huong ve trang danh sach

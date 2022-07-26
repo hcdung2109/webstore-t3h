@@ -21,6 +21,11 @@
     <link rel="stylesheet" href="{{ asset('frontend') }}/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/css/style.css" type="text/css">
+    <style>
+        #contact input {
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -124,8 +129,9 @@
 <script src="{{ asset('frontend') }}/js/mixitup.min.js"></script>
 <script src="{{ asset('frontend') }}/js/owl.carousel.min.js"></script>
 <script src="{{ asset('frontend') }}/js/main.js"></script>
+<script src="{{ asset('backend/js/notify.min.js') }}"></script>
 
-
+@yield('js')
 
 </body>
 
