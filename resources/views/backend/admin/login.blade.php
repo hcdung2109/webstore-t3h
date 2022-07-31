@@ -35,7 +35,20 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <form action="../../index2.html" method="post">
+
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('admin.postLogin') }}" method="post">
+            @csrf
             <div class="form-group has-feedback">
                 <input name="email" type="email" class="form-control" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -48,7 +61,7 @@
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox"> Ghi nhớ
+                            <input type="checkbox" name="remember" value="true"> Ghi nhớ
                         </label>
                     </div>
                 </div>

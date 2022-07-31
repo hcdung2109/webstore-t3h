@@ -21,9 +21,11 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('h
 Route::get('/lien-he', [\App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::post('/lien-he', [\App\Http\Controllers\HomeController::class, 'contactPost'])->name('contactPost');
 
-Route::get('/admin/login', [\App\Http\Controllers\AdminController::class, 'login']);
+Route::get('/admin/login', [\App\Http\Controllers\AdminController::class, 'login'])->name('login');
+Route::post('/admin/postLogin', [\App\Http\Controllers\AdminController::class, 'postLogin'])->name('admin.postLogin');
+Route::get('/admin/logout', [\App\Http\Controllers\AdminController::class, 'logout'])->name('admin.logout');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/dashboard',[\App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/test', [\App\Http\Controllers\BannerController::class, 'test']);
     Route::resource('product', \App\Http\Controllers\ProductController::class);
