@@ -30,6 +30,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/test', [\App\Http\Controllers\BannerController::class, 'test']);
     Route::resource('product', \App\Http\Controllers\ProductController::class);
     Route::resource('banner', \App\Http\Controllers\BannerController::class);
+    Route::post('category/restore/{category}', [\App\Http\Controllers\CategoryController::class, 'restore'])->name('category.restore');
     Route::resource('category', \App\Http\Controllers\CategoryController::class);
     Route::resource('article', \App\Http\Controllers\ArticleController::class);
     Route::resource('setting', \App\Http\Controllers\SettingController::class);

@@ -43,7 +43,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên</label>
-                                <input id="name" name="name" type="text" class="form-control" placeholder="">
+                                <input value="{{ old('name') }}" id="name" name="name" type="text" class="form-control" placeholder="">
                             </div>
 
                             <div class="form-group">
@@ -58,17 +58,17 @@
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Gía bán</label>
-                                <input id="price" name="price" type="text" class="form-control" placeholder="">
+                                <input value="{{ old('price') }}" id="price" name="price" type="text" class="form-control" placeholder="">
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Gía khuyến mại</label>
-                                <input id="sale" name="sale" type="text" class="form-control" placeholder="">
+                                <input value="{{ old('sale') }}" id="sale" name="sale" type="text" class="form-control" placeholder="">
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Liên kết</label>
-                                <input type="text" class="form-control" id="url" name="url" placeholder="">
+                                <input value="{{ old('url') }}" type="text" class="form-control" id="url" name="url" placeholder="">
                             </div>
 
                             <div class="form-group">
@@ -83,7 +83,7 @@
 
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Vị trí</label>
-                                <input min="0" type="number" class="form-control" id="position" name="position" placeholder="">
+                                <input value="{{ old('position') }}" min="0" type="number" class="form-control" id="position" name="position" placeholder="">
                             </div>
 
                             <div class="checkbox">

@@ -48,7 +48,7 @@ class ProductController extends Controller
     {
         // xác thực dữ liệu - validate
         $request->validate([
-            'title' => 'required|max:255',
+            'name' => 'required|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
             'category_id' => 'required',
             'summary' => 'required',
@@ -56,7 +56,7 @@ class ProductController extends Controller
             'meta_title' => 'required',
             'meta_description' => 'required',
         ],[
-            'title.required' => 'Bạn cần phải nhập vào tiêu đề',
+            'name.required' => 'Bạn cần phải nhập vào tiêu đề',
             'image.required' => 'Bạn chưa chọn file ảnh',
             'image.image' => 'File ảnh phải có dạng jpeg,png,jpg,gif,svg',
             'category_id.required' => 'Bạn cần phải chọn danh mục',
@@ -67,8 +67,8 @@ class ProductController extends Controller
         ]);
 
         $Product = new Product();
-        $Product->title = $request->input('title');
-        $Product->slug = Str::slug($request->input('title')); //slug
+        $Product->name = $request->input('name');
+        $Product->slug = Str::slug($request->input('name')); //slug
 
         if($request->hasFile('image')) { // Kiem tra xem co image duoc chon khong
             //get File
@@ -76,15 +76,18 @@ class ProductController extends Controller
             // Dat ten cho file image
             $filename = time().'_'.$file->getClientOriginalName();  //$file->getClientOriginalName() == ten anh
             //Dinh nghia duong dan se upload file len
-            $path_upload = 'upload/Product/';  //upload/brand; upload/vendor
+            $path_upload = 'upload/product/';  //upload/brand; upload/vendor
             // Thuc hien upload file
             $file->move($path_upload,$filename);
             // Luu lai ten
             $Product->image = $path_upload.$filename;
         }
 
+        $Product->stock = (int) $request->input('stock');
+        $Product->price = (int) Str::remove(',', $request->input('price'));
+        $Product->sale = (int) Str::remove(',', $request->input('sale'));
         $Product->url = $request->input('url');
-        $Product->category_id = $request->input('category_id');
+        $Product->category_id = (int) $request->input('category_id');
 
         // Loai
         //$Product->type = $request->input('type') ?? 0;
@@ -101,17 +104,15 @@ class ProductController extends Controller
             $position = $request->input('position');
         }
         $Product->position = $position;
-        //Mo ta
-
+        $Product->is_hot = $request->input('position') ?? 0;
         $Product->summary = $request->input('summary');
         $Product->description = $request->input('description');
         $Product->meta_title = $request->input('meta_title');
         $Product->meta_description = $request->input('meta_description');
-        //Luu
         $Product->save();
 
         //Chuyen huong ve trang danh sach
-        return redirect()->route('admin.Product.index');
+        return redirect()->route('admin.product.index');
     }
 
     /**

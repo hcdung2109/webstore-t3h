@@ -25,8 +25,10 @@
                             <tr>
                                 <th style="width: 10px">TT</th>
                                 <th>Hình ảnh</th>
-                                <th>Tiêu đề</th>
+                                <th>Tên SP</th>
                                 <th>Danh mục</th>
+                                <th>Giá gốc</th>
+                                <th>Giá KM</th>
                                 <th>Trạng thái</th>
                                 <th>Hành động</th>
                             </tr>
@@ -40,10 +42,12 @@
                                         <img src="{{ asset('upload/404.png') }}" width="100" height="75" alt="">
                                     @endif
                                 </td>
-                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->name }}</td>
                                 <td>
                                     {{ !empty($item->category->name) ? $item->category->name : '' }}
                                 </td>
+                                <td>{{ $item->price }}</td>
+                                <td>{{ $item->sale }}</td>
                                 <td>
                                     {!! $item->is_active == 1 ? '<span class="badge bg-green">ON</span>' : '<span class="badge bg-danger">OFF</span>' !!}
                                 </td>
@@ -86,7 +90,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url : '/admin/article/'+id,
+                            url : '/admin/product/'+id,
                             type: 'DELETE',
                             data: {},
                             success: function (res) {
